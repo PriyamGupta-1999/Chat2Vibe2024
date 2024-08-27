@@ -13,12 +13,12 @@
 ## Getting Started
 
 To start the project, use the following command:
-
-```bash
-npm run start
-
 Sign in Page:
 ![Screenshot](chat2vibe/public/gitImages/signin.png)
 
 Home Page:
 ![Screenshot](chat2vibe/public/gitImages/home.png)
+```bash
+npm run start
+
+
