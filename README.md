@@ -14,10 +14,10 @@
 
 To start the project, use the following command:
 Sign in Page:
-![Screenshot](chat2vibe/public/gitImages/signin.png)
+![Screenshot](chat2vibe2024/public/gitImages/signin.png)
 
 Home Page:
-![Screenshot](chat2vibe/public/gitImages/home.png)
+![Screenshot](chat2vibe2024/public/gitImages/home.png)
 ```bash
 npm run start
 
