@@ -1,0 +1,142 @@
+<link rel="stylesheet" href="<%= assetPath('css/post.css')%>">
+
+<style>
+     @media only screen and (max-width: 600px) {
+        #timeline-time{
+            /* display: none; */
+            /* margin-right: 2%;
+            margin-left: 0px;
+            width: 100%; */
+            font-size:smaller
+        }
+        #timeline-icon{
+            display: none;
+            
+        }
+
+        .timeline-body{
+            width: 100%;
+        }
+        li{
+            width: 100%;
+        }
+
+        #time{
+           font-size:smaller 
+        }
+        
+    }
+</style>
+<body>
+    <li id="post-<%= post._id %> ">
+        <!-- begin timeline-time -->
+        <div id="timeline-time" class="timeline-time">
+            <span class="date">
+                <p id="time" style="color: rgb(42, 106, 158)">
+                    <%= post.createdAt %>
+                </p>
+            </span>
+            <!-- <span class="time">20:17</span> -->
+        </div>
+        <!-- end timeline-time -->
+        <!-- begin timeline-icon -->
+        <div id="timeline-icon" class="timeline-icon">
+            <a href="javascript:;">&nbsp;</a>
+        </div>
+        <!-- end timeline-icon -->
+        <!-- begin timeline-body -->
+        <div class="timeline-body">
+
+            <div class="timeline-header">
+                <% if(post.user.avatar) {%>
+                    <span class="userimage"><img src="<%= post.user.avatar %>" alt=""></span>
+                    <%} else {%>
+                        <span class="userimage"><img src="https://bootdey.com/img/Content/avatar/avatar3.png"
+                                alt=""></span>
+
+                        <%}%>
+
+                            <span class="username">
+                                <%= post.user.name %>
+                            </span>
+                            <!-- <span class="pull-right text-muted">82 Views</span> -->
+            </div>
+            <div class="timeline-content">
+                <p class="lead"> <i class="fa  fa-fw pull-left"></i>
+                    <%= post.content %> <i class="fa  fa-fw pull-right"></i>
+                </p>
+                </p>
+
+
+            </div>
+            <div class="timeline-footer">
+                <% if(locals.user && locals.user.id==post.user.id) { %>
+                    <div id="trash button" class="d-flex justify-content-end">
+                        <a class="delete-post-button" href="/posts/destroy/<%= post.id %>"><button type="button"
+                                class="btn btn-outline-danger">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-trash" viewBox="0 0 16 16">
+                                    <path
+                                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z">
+                                    </path>
+                                    <path fill-rule="evenodd"
+                                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z">
+                                    </path>
+                                </svg>
+                                Delete Post
+                            </button></a>
+                    </div>
+                    <% } %>
+                        <button id='comment-button-<%= post._id %>'><i class="fa fa-comments fa-fw fa-lg m-r-3"></i>
+                            Comment</button>
+                        <%= post.likes.length %><a href="/likes/toggle/?id=<%= post._id %>&type=Post"
+                                id="toggle-button-<%= post._id %>" class="m-r-15 text-inverse-lighter mx-2"><i
+                                    class="fa fa-thumbs-up fa-fw fa-lg m-r-3 "></i> Like</a>
+                            <div id="post-comments-list-<%= post._id %>" style="display: none;">
+                                <ul id="post-comments-<%= post._id %>" class="list-group">
+                                    <% for( comments of post.Comments) {%>
+                                        <li class="list-group-item">
+                                            <%- include('_comments') -%>
+                                        </li>
+                                        <% } %>
+                                </ul>
+                            </div>
+
+                            <!-- <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>  -->
+                            <!-- <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a> -->
+            </div>
+            <% if(locals.user) {%>
+                <div class="timeline-comment-box">
+                    <div class="user"><img src="https://bootdey.com/img/Content/avatar/avatar3.png"></div>
+                    <div class="input">
+                        <form action="/comments/create" method="POST">
+                            <div class="input-group">
+                                <input name="content" type="text" class="form-control rounded-corner"
+                                    placeholder="Write a comment..."> <span class="input-group-btn p-l-10">
+                                    <input type="hidden" name="post" value="<%= post._id %>">
+                                    <button class="btn btn-primary f-s-12 rounded-corner" type="submit">Comment</button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <% } %>
+
+        </div>
+        <!-- end timeline-body -->
+
+    </li>
+
+</body>
+
+<script>
+
+    document.getElementById('comment-button-<%= post._id %>').addEventListener('click', function (e) {
+
+        console.log('clciked');
+        e.preventDefault();
+
+        document.getElementById('post-comments-list-<%= post._id %>').style.display = 'block';
+    })
+
+</script>

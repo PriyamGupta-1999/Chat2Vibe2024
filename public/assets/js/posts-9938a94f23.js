@@ -1,0 +1,1 @@
+const abcdf=document.getElementById("comment-button");console.log(a),abcdf.addEventListener("mouseover",(function(){console.log("clciked")})),document.getElementById("abc").addEventListener("click",(function(){console.log("hhh")}));var ab=document.getElementById("abc");console.log(ab),a.innerHTML="aacvc";

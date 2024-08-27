@@ -1,0 +1,47 @@
+<!-- <p>
+    <% if(locals.user && locals.user.id==comments.user.id) { %>
+        <small>
+            <a href="/comments/destroy/<%=comments.id%>">X</a>
+        </small>    
+    
+     <% } %>
+    
+    <%= comments.content %>
+    <br>
+    <small>
+        <%= comments.user.name %>
+    </small>
+</p> -->
+
+<div class="container">
+    <div class="row">
+    <div class="col-sm-12">
+    <!-- <h3>User Comment Example</h3> -->
+    </div><!-- /col-sm-12 -->
+    </div><!-- /row -->
+    <div class="row">
+    <div class="col-sm-1">
+    <div class="thumbnail">
+    <% if(comments.user.avatar) {%>
+    <img class="img-responsive user-photo" src="<%= comments.user.avatar%>" alt="">
+    <%} else {%>
+        <img class="img-responsive user-photo" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
+    <%}%>
+    </div><!-- /thumbnail -->
+    </div><!-- /col-sm-1 -->
+    
+    <div class="col-sm-5">
+    <div class="panel panel-default">
+    <div class="panel-heading">
+    <strong><%= comments.user.name %></strong> 
+    </div>
+    <div class="panel-body">
+        <%= comments.content %>
+    </div><!-- /panel-body -->
+    </div><!-- /panel panel-default -->
+    </div><!-- /col-sm-5 -->
+    
+   
+    </div><!-- /row -->
+    
+    </div>

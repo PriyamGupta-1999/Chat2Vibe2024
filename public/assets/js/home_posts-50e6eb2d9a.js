@@ -1,0 +1,1 @@
+document.getElementById("posts-new").addEventListener("click",(function(e){e.preventDefault(),document.getElementById("Create-a-post").style.display="inline"})),document.getElementById("cross-post").addEventListener("click",(function(){document.getElementById("Create-a-post").style.display="none"}));
